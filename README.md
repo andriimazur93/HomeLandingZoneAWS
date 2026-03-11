@@ -89,12 +89,12 @@ We have abstracted the complex 3-phase Terraform bootstrap process into a simple
    ```bash
    make bootstrap
    ```
-3. The script will automatically pause and generate a `terraform.tfvars` file natively. Open this file and fill in your desired AWS Region and alert email address.
+3. The script will automatically pause and generate a `terraform.tfvars` file. Open this file and fill in your desired AWS Region and alert email address.
 4. Re-run `make bootstrap`.
-5. Terraform will create the infrastructure using local state. Then, the script will automatically edit `backend.tf` to point to the newly created S3 bucket.
+5. Terraform will create the infrastructure using local state. Then, the script will automatically populate `backend.tfbackend` (which is gitignored) with the newly created S3 bucket name.
 6. When prompted by Terraform: *"Do you want to copy existing state to the new backend?"*, type **`yes`**.
 
-Your state is now securely hosted in AWS! 🎉 
+Your state is now securely hosted in AWS! The `backend.tfbackend` file on your local disk holds your Account ID and bucket name — it is listed in `.gitignore` and will never be committed. 
 
 ---
 

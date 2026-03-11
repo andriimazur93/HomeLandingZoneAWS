@@ -1,6 +1,9 @@
 # VS Code
 **/.vscode
 
+# Backend partial config (contains account-specific values, never commit)
+*.tfbackend
+
 # Local .terraform directories
 **/.terraform/*
 

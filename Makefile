@@ -4,7 +4,7 @@ help: ## Show this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 init: ## Initialize the Terraform working directory
-	terraform init
+	terraform init -backend-config=backend.tfbackend
 
 plan: init ## Generate and show an execution plan
 	terraform plan
@@ -37,7 +37,7 @@ bootstrap: ## Run the 3-phase bootstrap process (Local Apply -> Migration)
 	@echo "--- Phase 3: State Migration ---"
 	@echo "Terraform will now migrate your local state to the S3 backend."
 	@echo "When prompted 'Do you want to copy existing state to the new backend?', type 'yes'."
-	terraform init -migrate-state
+	terraform init -migrate-state -backend-config=backend.tfbackend
 
 clean: ## Remove local terraform configurations
 	rm -rf .terraform
