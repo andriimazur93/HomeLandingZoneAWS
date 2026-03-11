@@ -1,0 +1,19 @@
+terraform {
+  backend "s3" {
+    # Replace this with the value from 'terraform_state_s3_bucket_name' output
+    # e.g., bucket = "homelab-tfstate-123456789012-us-east-1"
+    bucket = "REPLACE_WITH_OUTPUT_BUCKET_NAME"
+
+    # This key is specifically for the landing zone state
+    key = "home-landing-zone/terraform.tfstate"
+
+    # AWS region
+    region = "us-east-1"
+
+    # The DynamoDB Table name used for locking
+    dynamodb_table = "homelab-tfstate-locks"
+
+    # Encrypt state file
+    encrypt = true
+  }
+}
